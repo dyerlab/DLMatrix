@@ -250,6 +250,8 @@ extension Matrix: Equatable {
 // MARK: - Conforms to the Printing Protocol
 
 extension Matrix: CustomStringConvertible {
+    
+    /// Dumps matrix to string
     public var description: String {
         var ret = String("Matrix: (\(rows) x \(cols))")
         ret += "\n[\n"
@@ -270,6 +272,8 @@ extension Matrix: CustomStringConvertible {
 // MARK: - Algebraic Operations
 
 public extension Matrix {
+    
+    /// Centers all elements of the matrix on colMean
     func center() {
         let µ = colSum / Double(rows)
         for i in 0 ..< rows {
@@ -278,7 +282,10 @@ public extension Matrix {
             }
         }
     }
-
+    
+    
+    
+    /// Extract submatrices from an existing matrix
     func submatrix(_ r: [Int], _ c: [Int]) -> Matrix {
         let ret = Matrix(r.count, c.count, 0.0)
         for i in 0 ..< r.count {
