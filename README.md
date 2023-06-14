@@ -1,2 +1,5 @@
 # DLMatrix
-Swift Package for vector and matrix operations.
+
+A swift package for vector and matrix operations.
+
+
