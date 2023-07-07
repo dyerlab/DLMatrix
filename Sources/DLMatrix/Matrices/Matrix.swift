@@ -39,7 +39,7 @@ public class Matrix {
     var values: Vector
     
     /// Storage for formatting digits on output
-    var digits: [Int]
+    public var digits: [Int]
 
     /// The number of rows in the matrix
     public var rows: Int {
