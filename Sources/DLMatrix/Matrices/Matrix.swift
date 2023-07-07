@@ -233,7 +233,7 @@ public class Matrix {
     }
 
     
-    /// Returns value formatted with the specific number of digits
+    /// Returns value formatted with the specific number of digits for printing
     public func formattedValue(r: Int, c: Int) -> String {
         return self[r,c].formatted(.number.precision(.fractionLength( digits[c] )))
     }
