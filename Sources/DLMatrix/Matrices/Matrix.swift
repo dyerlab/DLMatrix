@@ -233,7 +233,7 @@ public class Matrix {
     }
 
     
-    /// Returns value formatted with the specific number of digits for printing
+    /// Returns value formatted with the specific number of digits for printing externally
     public func formattedValue(r: Int, c: Int) -> String {
         return self[r,c].formatted(.number.precision(.fractionLength( digits[c] )))
     }
@@ -275,7 +275,7 @@ extension Matrix: CustomStringConvertible {
             ret += String(" \(rowNames[r]) ")
 
             for c in 0 ..< cols {
-                ret += String(" \(values[(r * cols) + c])")
+                ret += String(" \(formattedValue(r: r, c: c))")
             }
             ret += "\n"
         }
