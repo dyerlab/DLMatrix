@@ -34,8 +34,12 @@ import Foundation
 /// This is the base class for 2-dimensinoal matrix data.  It is defined as a row-major matrix and is configured
 ///  internally to use the `Accelerate` library for
 public class Matrix {
+    
     /// The storage for the values in the matrix
     var values: Vector
+    
+    /// Storage for formatting digits on output
+    var digits: [Int]
 
     /// The number of rows in the matrix
     public var rows: Int {
@@ -168,6 +172,7 @@ public class Matrix {
         values = Vector(repeating: value, count: r * c)
         rowNames = Array(repeating: "", count: r)
         colNames = Array(repeating: "", count: c)
+        digits = Array(repeating:4, count: c )
     }
 
     /// Intitializer for matrix based upon vector of values
@@ -186,6 +191,7 @@ public class Matrix {
         }
         rowNames = Array(repeating: "", count: r)
         colNames = Array(repeating: "", count: c)
+        digits = Array(repeating:4, count: c )
     }
 
     public init(_ r: Int, _ c: Int, _ seq: ClosedRange<Double>) {
@@ -198,12 +204,14 @@ public class Matrix {
         values = vec
         rowNames = Array(repeating: "", count: r)
         colNames = Array(repeating: "", count: c)
+        digits = Array(repeating:4, count: c )
     }
 
     public init(_ r: Int, _ c: Int, _ rowNames: [String], _ colNames: [String]) {
         values = Vector(repeating: 0.0, count: r * c)
         self.rowNames = rowNames
         self.colNames = colNames
+        digits = Array(repeating:4, count: c )
     }
 
     /// Grab a row as a vector
@@ -224,6 +232,13 @@ public class Matrix {
         return ret
     }
 
+    
+    /// Returns value formatted with the specific number of digits
+    public func formattedValue(r: Int, c: Int) -> String {
+        return self[r,c].formatted(.number.precision(.fractionLength( digits[c] )))
+    }
+    
+    
     /// An internal function to check the indices to see if they will work properly
     internal func areValidIndices(_ r: Int, _ c: Int) -> Bool {
         return r >= 0 && c >= 0 && r < rows && c < cols
@@ -366,3 +381,7 @@ extension Matrix: rSourceConvertible {
         }
     }
 }
+
+
+
+
