@@ -335,12 +335,23 @@ public extension Matrix {
 
 public extension Matrix {
     
+    /// Default Matrix
+    ///
+    /// Just a default matrix with some values in it
+    static var DefaultMatrix: Matrix {
+        let vals = Vector([ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0 ])
+        let X = Matrix(3, 5, vals )
+        X.rowNames = ["Row 1", "Row 2", "Row 3"]
+        X.colNames = ["Col 1", "Col 2", "Col 3", "Col 4", "Col 5"]
+        return X
+    }
+    
+    
     
     /// Identity Matrix
     ///
     /// - Returns: NxN matrix with diagonal of 1 and 0 elsewhere.
     static func Identity( N: Int ) -> Matrix {
-        
         let I = Matrix(N,N,0.0)
         for i in 0 ..< N {
             I[i,i] = 1.0
