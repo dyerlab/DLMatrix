@@ -102,6 +102,9 @@ public extension Vector {
             default:
                 return SCNVector3Make(Float(self[0]), Float(self[1]), Float(self[2]))
 
+        #else
+        default:
+            return SCNVector3(x: 0.0, y: 0.0, z: 0.0)
         #endif
         }
     }
