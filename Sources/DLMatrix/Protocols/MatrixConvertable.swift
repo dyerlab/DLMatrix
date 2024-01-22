@@ -30,7 +30,10 @@
 import Foundation
 
 /// This is a simple protocol that other objects can adopt to be able to generate matrix repsresenations.
+///
+/// This is the protocol that allows any object to be classified as having a numerical matrix equivallent.
 public protocol MatrixConvertible {
+    
     // All Objects conforming to this protocol must implement this function
     func asMatrix() -> Matrix
 }

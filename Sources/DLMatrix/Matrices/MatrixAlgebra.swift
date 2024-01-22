@@ -29,6 +29,13 @@
 
 import Accelerate
 
+
+/// Generalized Matrix Inverse
+///
+/// This is a generalized inverse routine.
+/// - Parameters:
+///     - X: The matrix to invert.
+///  - Returns: The inverse matrix (if possible) or a zero matrix.
 public func GeneralizedInverse(_ X: Matrix) -> Matrix {
     if X.rows != X.cols {
         return Matrix(0, 0)
@@ -69,7 +76,8 @@ public func GeneralizedInverse(_ X: Matrix) -> Matrix {
 /// Principal Component Rotation
 ///
 /// This function estimates a Principal Coponent Rotation on the passed data matrix.
-/// - Parameter X: A data matrix
+/// - Parameters
+///     - X: A data matrix
 /// - Returns: A tuple with the eigenvalues (d), the eigenvectors (V) and the rotation on the original data (X).
 public func PCRotation(_ X: Matrix) -> (d: Vector, V: Matrix, X: Matrix)? {
     let A = X
@@ -87,7 +95,8 @@ public func PCRotation(_ X: Matrix) -> (d: Vector, V: Matrix, X: Matrix)? {
 /// Compute the Singular Value Decomposition of a Matrix
 ///
 /// This decomposes the matrix such that **A = U * Matrix( d.count,d.count,d,true) * V.transpose()**.
-/// - Parameter A: The matrix to partition
+/// - Parameter 
+///     - A: The matrix to partition
 /// - Returns: The left and right eigenvalue matrices and the vector of igenvalues.
 public func SingularValueDecomposition(_ A: Matrix) -> (U: Matrix, d: Vector, V: Matrix)? {
     var M = __CLPK_integer(A.rows)

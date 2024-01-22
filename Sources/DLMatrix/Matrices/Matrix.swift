@@ -146,7 +146,7 @@ public class Matrix {
     /// - Parameters:
     ///  - r: The row
     ///  - c: The column
-    ///  - Returns: If asking for it, this returns the value at the requested indices.
+    /// - Returns: The value at the specific index.
     public subscript(_ r: Int, _ c: Int) -> Double {
         get {
             if !areValidIndices(r, c) {
@@ -168,6 +168,7 @@ public class Matrix {
     ///   - r: The number of Rows
     ///   - c: The number of Columns
     ///   - value: The value to populate the matrix with (default=0.0)
+    /// - Returns: Matrix of 0 values of size rxc
     public init(_ r: Int, _ c: Int, _ value: Double = 0.0) {
         values = Vector(repeating: value, count: r * c)
         rowNames = Array(repeating: "", count: r)
@@ -183,6 +184,7 @@ public class Matrix {
     ///   - r: The number of Rows
     ///   - c: The number of Columns
     ///   - values: The value to populate the matrix with (default=0.0)
+    /// - Returns: A  matrix of size rxc with values set by the vector you passed to it.
     public init(_ r: Int, _ c: Int, _ vec: Vector) {
         if vec.count == 0 || r * c != vec.count {
             values = [Double]()
@@ -194,6 +196,14 @@ public class Matrix {
         digits = Array(repeating:4, count: c )
     }
 
+    /// Intitializer for matrix based upon vector of values
+    ///
+    /// This initializer makes an empty matrix with specified number of rows and columns based upon a defined sequence.
+    /// - Parameters:
+    ///   - r: The number of Rows
+    ///   - c: The number of Columns
+    ///   - seq: A swift sequence to use
+    /// - Returns: A  matrix of size rxc whose values are given in the sequence `seq`
     public init(_ r: Int, _ c: Int, _ seq: ClosedRange<Double>) {
         let steps = Double(r * c) - 1.0
         let unit = (seq.upperBound - seq.lowerBound) / steps
@@ -207,6 +217,17 @@ public class Matrix {
         digits = Array(repeating:4, count: c )
     }
 
+    /// Intitializer for matrix based upon vector of values
+    ///
+    /// This initializer makes an empty matrix with specified number of rows and columns.  This fills the matrix up **by row**
+    ///  and not by columns.  If you want **bycol** then you must manually **transpose** the result.
+    /// - Parameters:
+    ///   - r: The number of Rows
+    ///   - c: The number of Columns
+    ///   - rowNames: A vector of string values for row names
+    ///   - colNames: A string vector of names for the columns.
+    ///   - values: The value to populate the matrix with (default=0.0)
+    /// - Returns: A zero matrix of size rxc with set row and column names.
     public init(_ r: Int, _ c: Int, _ rowNames: [String], _ colNames: [String]) {
         values = Vector(repeating: 0.0, count: r * c)
         self.rowNames = rowNames
@@ -314,6 +335,10 @@ public extension Matrix {
 
 public extension Matrix {
     
+    
+    /// Identity Matrix
+    ///
+    /// - Returns: NxN matrix with diagonal of 1 and 0 elsewhere.
     static func Identity( N: Int ) -> Matrix {
         
         let I = Matrix(N,N,0.0)
@@ -323,6 +348,12 @@ public extension Matrix {
         return I
     }
     
+    /// Design matrix
+    ///
+    /// Creates a generic design matrix as [
+    /// - Parameters:
+    ///     - strata: A string vector of strata names
+    /// - Returns: An NxK matrix of `[0,1]` values where each column indexes the values in the strata vector for the column associated with that stratum.
     static func DesignMatrix(strata: [String]) -> Matrix {
         let r = strata.count
         let colNames = [String](Set<String>(strata)).sorted()
@@ -336,6 +367,12 @@ public extension Matrix {
         return X
     }
 
+    /// Idempotent Hypothesis Matrix for Strata
+    ///
+    /// This matrix creates a N x N idempotent Hat matrix **H** from a vector of strata names.  This H matrix is determined by taking the `DesignMatrix()` object X and transformatin it as $H = X * (X'X)^{-1} * X^{-1}$.
+    /// - Parameters:
+    ///     - strata: A string vector of strata names
+    /// - Returns: An NxN matrix of `[0,1]` values where each column indexes the values in the strata vector for the column associated with that stratum.
     static func IdempotentHatMatrix(strata: [String]) -> Matrix {
         let X = Matrix.DesignMatrix(strata: strata)
         let H = X .* GeneralizedInverse(X.transpose .* X) .* X.transpose

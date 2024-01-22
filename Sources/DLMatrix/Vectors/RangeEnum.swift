@@ -30,11 +30,19 @@
 
 import Foundation
 
+/// Categories of ranges for random number generation.
 public enum RangeEnum: Int, CaseIterable, Comparable {
+    
+    /// Uniform distribution from 0 to 1
     case uniform_0_1 = 1
+    
+    /// Uniform distribution from -1 to +1
     case uniform_neg1_1 = 2
+    
+    /// Normal distribution from 0 to 1
     case normal_0_1 = 3
 
+    /// Static comparison between cases based upon numerical equivalents.
     public static func < (lhs: RangeEnum, rhs: RangeEnum) -> Bool {
         lhs.rawValue < rhs.rawValue
     }

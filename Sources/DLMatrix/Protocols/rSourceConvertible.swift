@@ -29,6 +29,12 @@
 
 import Foundation
 
+/// This protocol helps object pass their contents to `R` sourcecode in textual formats
+///
+/// Any object conforming to this protocol must be able to transfer its internal representation
+///  to one that can be copy-and-pasted into an `R` workflow.
 public protocol rSourceConvertible {
+    
+    /// The main function that must exist in any of these protocols.
     func toR() -> String
 }

@@ -109,6 +109,11 @@ public extension Vector {
         }
     }
 
+    /// Find smallest elements
+    ///
+    /// - Parameters:
+    ///     - other: The other vector to compare it to
+    /// - Returns This vector if `other` is not the same length otherwise a vector of the same size with the smallest entries from both vector
     internal func smallest(other: Vector) -> Vector {
         if count != other.count {
             return self
@@ -120,6 +125,7 @@ public extension Vector {
         return ret
     }
 
+    /// Returns an identically sized vector whose elements are the larger of the two (elementwise).
     internal func largest(other: Vector) -> Vector {
         if count != other.count {
             return self

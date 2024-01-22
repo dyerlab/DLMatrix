@@ -31,6 +31,6 @@ import Foundation
 
 /// This is a simple protocol that other objects can adopt to be able to generate matrix repsresenations.
 public protocol VectorConvertible {
-    // Any object that adopts this protocol must overload this method
+    /// Any object that adopts this protocol must overload this method
     func asVector() -> Vector
 }

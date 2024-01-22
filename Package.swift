@@ -3,6 +3,9 @@
 
 import PackageDescription
 
+/// The main pacakge for vector and matrix routines used in many places.
+///
+/// This package is where I put all the underlying matrix algebra materials for popgen and spatial data work. 
 let package = Package(
     name: "DLMatrix",
     platforms: [ .macOS("12.0"),

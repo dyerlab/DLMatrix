@@ -41,7 +41,10 @@ public extension Sequence where Iterator.Element: Hashable {
 
 /// Extension for array objects to produce a historgram dictionary
 public extension Sequence where Element: Hashable {
+    
     /// Returns an element count hash of the sequence
+    ///
+    /// This creates a general 
     func histogram() -> [Element: Int] {
         return reduce(into: [:]) { counts, elem in counts[elem, default: 0] += 1 }
     }
