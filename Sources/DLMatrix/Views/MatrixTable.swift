@@ -1,6 +1,6 @@
 //
 //  SwiftUIView.swift
-//  
+//
 //
 //  Created by Rodney Dyer on 1/22/24.
 //
@@ -9,32 +9,39 @@ import SwiftUI
 
 struct SwiftUIView: View {
     let matrix: Matrix
-    var columns: [GridItem] {
-        var ret = [GridItem]()
-        
-        /// Row Label
-        ret.append( GridItem(.flexible() ) )
-        
-        /// One for each column
-        ret.append(contentsOf: Array(repeating: GridItem(.flexible(minimum: 75.0)), count: matrix.rows))
-        return ret
-    }
+    var numDigits: Int = 1
     
     var body: some View {
-        ScrollView( [.horizontal, .vertical]) {
-            LazyVGrid(columns: columns) {
+        ScrollView([.horizontal, .vertical]) {
+            Grid {
                 
-                // Header Row
-                Text("")
-                ForEach( matrix.colNames, id: \.self ){ label in
-                    Text("\(label)")
+                GridRow {
+                    Text("")
+                    ForEach( 0 ..< matrix.cols, id: \.self){ col in
+                        Text("\(matrix.colNames[col])")
+                            .bold()
+                            .gridColumnAlignment(.trailing)
+                    }
+                }
+                
+                
+                ForEach( 0 ..< matrix.rows, id: \.self ){ row in
+                    GridRow {
+                        Text("\(matrix.rowNames[row])")
+                            .bold()
+                        ForEach( 0 ..< matrix.cols, id: \.self){ col in
+                            Text(String(format: "%0.\(numDigits)f", matrix[row,col]))
+                                .gridColumnAlignment(.trailing)
+                        }
+                    }
                 }
             }
+            .padding()
         }
     }
 }
 
 #Preview {
-    SwiftUIView(matrix: Matrix.DefaultMatrix )
+    SwiftUIView(matrix: Matrix.DefaultMatrixLarge )
 }
 

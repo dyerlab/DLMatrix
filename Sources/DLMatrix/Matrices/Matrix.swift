@@ -346,6 +346,22 @@ public extension Matrix {
         return X
     }
     
+    /// A larger matrix
+    static var DefaultMatrixLarge: Matrix {
+        let X = Matrix(25,50)
+        for i in 0 ..< 25 {
+            X.rowNames[i] = String("Row \(i+1)")
+            for j in 0 ..< 50 {
+                X[i,j] = Double(i*50 + j)
+            }
+        }
+        
+        for j in 0 ..< 50 {
+            X.colNames[j] = String("Column \(j)")
+        }
+        return X
+    }
+    
     
     
     /// Identity Matrix
