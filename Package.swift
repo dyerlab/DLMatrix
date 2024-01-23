@@ -9,9 +9,10 @@ import PackageDescription
 
 
 
+
 let package = Package(
     name: "DLMatrix",
-    platforms: [ .macOS("14.0"),
+    platforms: [ .macOS("14"),
                  .iOS(.v16)
                ],
     products: [
@@ -31,24 +32,12 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "DLMatrix",
-            dependencies: []),
+            dependencies: [],
+            swiftSettings: [
+                .define("ACCELERATE_NEW_LAPACK")
+            ]),
         .testTarget(
             name: "DLMatrixTests",
-            dependencies: ["DLMatrix"]),
+            dependencies: ["DLMatrix"] ),
     ]
 )
-
-for target in package.targets {
-  target.linkerSettings = target.linkerSettings ?? []
-  target.linkerSettings?.append(
-    .unsafeFlags([
-      "-DACCELERATE_NEW_LAPACK "
-    ])
-  )
-}
-
-
-
-
-
-
