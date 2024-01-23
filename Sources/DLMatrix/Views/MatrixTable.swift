@@ -41,9 +41,9 @@ struct SwiftUIView: View {
     }
 }
 
-/*
+
 #Preview {
     SwiftUIView(matrix: Matrix.DefaultMatrixLarge )
 }
- */
+
 
