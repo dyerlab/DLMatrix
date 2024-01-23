@@ -32,11 +32,13 @@ import Foundation
 
 /// Override to Sequences with Hashable Items
 public extension Sequence where Iterator.Element: Hashable {
+    
     /// Returns set of unique items in sequence
     func unique() -> [Iterator.Element] {
         var seen: Set<Iterator.Element> = []
         return filter { seen.insert($0).inserted }
     }
+    
 }
 
 /// Extension for array objects to produce a historgram dictionary
