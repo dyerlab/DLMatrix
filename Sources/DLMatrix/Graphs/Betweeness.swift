@@ -10,14 +10,21 @@
 //         Making Population Genetic Software That Doesn't Suck
 //
 //  Betweeness.swift
-//  popgraph
 //
 //  Created by Rodney Dyer on 11/5/23.
 //
 
 import Foundation
+/**
+ Node Betweenness Centrality.
+ 
+ For every pair of vertices in a connected graph, there exists at least one shortest path between the vertices such that either the number of edges that the path passes through (for unweighted graphs) or the sum of the weights of the edges (for weighted graphs) is minimized. The betweenness centrality for each vertex is the number of these shortest paths that pass through the vertex.
 
-public func BetweennessCentrality( A: Matrix ) -> Vector {
+ - Parameters:
+    - A: An adjacency Matrix
+ - Returns: A ``Vector`` of node betweeness values, ordered in the same way as the adjacency matrix.
+ */
+public func Betweenness( A: Matrix ) -> Vector {
     let N = A.rows
     var btwn = Vector(repeating: 0.0, count: N)
     let gMax = A.sum

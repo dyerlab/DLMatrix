@@ -8,8 +8,6 @@ import PackageDescription
 /// This package is where I put all the underlying matrix algebra materials for popgen and spatial data work. 
 
 
-
-
 let package = Package(
     name: "DLMatrix",
     platforms: [ .macOS("14"),
@@ -19,7 +17,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "DLMatrix",
-            targets: ["DLMatrix"]),
+            targets: ["DLMatrix"] ),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.

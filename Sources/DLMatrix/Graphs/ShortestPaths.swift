@@ -17,6 +17,13 @@
 
 import Foundation
 
+/**
+ Finds the length of the shortest path between each node.
+
+ - Parameters:
+    - A: An adjacency ``Matrix``
+ - Returns: A shortest path ``Matrix`` indicating the least costly distance between each pair of nodes.  For nodes that are not connected, it sets the distance as `Double.nan`.
+ */
 public func ShortestPaths( A: Matrix ) -> Matrix {
     let N = A.cols
     let tot = A.rowSum.sum
@@ -61,3 +68,4 @@ public func ShortestPaths( A: Matrix ) -> Matrix {
     
     return D
 }
+
