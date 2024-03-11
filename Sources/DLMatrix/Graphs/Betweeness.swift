@@ -17,7 +17,7 @@
 
 import Foundation
 
-func BetweennessCentrality( A: Matrix ) -> Vector {
+public func BetweennessCentrality( A: Matrix ) -> Vector {
     let N = A.rows
     var btwn = Vector(repeating: 0.0, count: N)
     let gMax = A.sum

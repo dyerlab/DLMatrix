@@ -17,7 +17,7 @@
 
 import Foundation
 
-func Closeness( A: Matrix ) -> Vector {
+public func Closeness( A: Matrix ) -> Vector {
     let N = A.rows
     var ret = Vector( repeating: 0.0, count: N)
     let D = ShortestPaths(A: A )
